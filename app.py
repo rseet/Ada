@@ -9,6 +9,14 @@ from pptx import Presentation
 from pathlib import Path
 from pypdf import PdfReader
 
+# ---------- PPTX TEMPLATE ----------
+BASE_DIR = Path(__file__).parent
+TEMPLATE_PATH = BASE_DIR / "KNB Research Slides Template 2025.pptx"
+
+if not TEMPLATE_PATH.exists():
+    st.error(f"Template not found at: {TEMPLATE_PATH}")
+    st.stop()
+
 # ---------- PAGE CONFIG (must be first Streamlit command) ----------
 st.set_page_config(page_title="Research First-Cut Workbench", layout="wide")
 st.title("Research First-Cut Workbench")
