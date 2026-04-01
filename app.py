@@ -560,7 +560,7 @@ Return valid JSON:
             include_chart_placeholders = st.checkbox("Add chart-type placeholder text", value=True)
     
             # ---- LOCAL TEMPLATE PATH (NO UPLOADER) ----
-        st.caption(f"Using template: {TEMPLATE_PATH}")
+            st.caption(f"Using template: {TEMPLATE_PATH}")
     
             if st.button("Generate Deck", key="generate_deck_btn"):
                 if not selected_name:
