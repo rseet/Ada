@@ -15,7 +15,8 @@ st.title("Research First-Cut Workbench")
 st.caption("From brief to defensible storyboard - before PowerPoint.")
 
 # ---------- ENV / AZURE CLIENT ----------
-load_dotenv(r"C:\Users\ruixi.seet\OneDrive - Khazanah Nasional Berhad\2026\Analytics\Research\Project Kora2\.env")
+if Path(".env").exists():
+    load_dotenv()
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
