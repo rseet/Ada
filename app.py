@@ -560,15 +560,7 @@ Return valid JSON:
             include_chart_placeholders = st.checkbox("Add chart-type placeholder text", value=True)
     
             # ---- LOCAL TEMPLATE PATH (NO UPLOADER) ----
-            TEMPLATE_PATH = os.getenv(
-                "PPTX_TEMPLATE_PATH",
-                r"C:\Users\ruixi.seet\OneDrive - Khazanah Nasional Berhad\2026\Analytics\Research\Project Kora2\KNB Research Slides Template 2025.pptx"
-            )
-            st.caption(f"Using template: {TEMPLATE_PATH}")
-    
-            if not Path(TEMPLATE_PATH).exists():
-                st.error(f"Template not found at: {TEMPLATE_PATH}")
-                st.stop()
+        st.caption(f"Using template: {TEMPLATE_PATH}")
     
             if st.button("Generate Deck", key="generate_deck_btn"):
                 if not selected_name:
