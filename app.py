@@ -125,17 +125,24 @@ def replace_text_contains(slide, needle, replacement):
             p.text = replacement
 
 def set_title(slide, title_text):
-    # If the slide has a title placeholder
+    for shape in iter_text_shapes(slide):
+        if "Main title" in (shape.text_frame.text or ""):
+            shape.text_frame.clear()
+            shape.text_frame.paragraphs[0].text = title_text
+            # Remove the built-in title placeholder ("Click to add title") if present
+            try:
+                title_ph = slide.shapes.title
+                if title_ph is not None:
+                    title_ph.element.getparent().remove(title_ph.element)
+            except Exception:
+                pass
+            return
     try:
         if slide.shapes.title and slide.shapes.title.has_text_frame:
             slide.shapes.title.text_frame.clear()
             slide.shapes.title.text_frame.paragraphs[0].text = title_text
-            return
     except Exception:
         pass
-
-    # fallback: find shape containing "Main title" marker or similar
-    replace_text_contains(slide, "Main title", title_text)
 
 def add_bullets_to_contents(slide, bullets):
     # 1) try marker
@@ -589,7 +596,7 @@ Return valid JSON:
                         prs = Presentation(TEMPLATE_PATH)
     
                         base_cover = prs.slides[0]
-                        base_content = prs.slides[1]
+                        base_content = prs.slides[2]
                         base_divider = prs.slides[4] if len(prs.slides) > 4 else prs.slides[1]  # fixed ">"
     
                         created_slides = []
